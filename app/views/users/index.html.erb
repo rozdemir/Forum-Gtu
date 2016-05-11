@@ -1,4 +1,4 @@
-
+<% if current_user && current_user.id==1 %>
 
 <h1>Listing Users</h1>
 
@@ -29,3 +29,4 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
+<%  end %>

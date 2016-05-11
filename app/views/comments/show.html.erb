@@ -4,6 +4,8 @@
   <strong>Comment:</strong>
   <%= @comment.comment %>
 </p>
-
+<% if current_user && (current_user.id==1 || current_user==@comment.user )%>
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>
+
+<% end %>
