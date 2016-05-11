@@ -35,4 +35,6 @@
 <%else%>
     <p> No Post posted about this category </p>
 <%end%>
+<% if current_user %>
 <button class="btn btn-primary"><%= link_to "New Post", "/posts/new?category=#{@category.id}" %></button>
+<% end %>
