@@ -1,0 +1,37 @@
+<%- model_class = Comment -%>
+<div class="page-header">
+  <h1><%=@post.title %> Comments</h1>
+</div>
+<% if @post.comments.count>0%>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:user) %></th>
+
+    <th><%= model_class.human_attribute_name(:comment) %></th>
+
+
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @post.comments.each do |comment| %>
+      <tr>
+
+        <td class="text-primary"><%= comment.user %></td>
+        <td class="text-success"><%= comment.comment %></td>
+
+        <td><% if current_user && comment.user == current_user %><%= link_to 'Edit', edit_comment_path(comment) %><% end %></td>
+        <td><% if current_user && comment.user == current_user %><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+    <%else%>
+    <p> No Comments posted</p>
+    <%end%>
+<button class="btn btn-primary"><%= link_to "New Comment", "/comments/new?post=#{@post.id}" %></button>
+
+
+

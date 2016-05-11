@@ -1,0 +1,19 @@
+<%= form_for @post do |f| %>
+
+  <div class="form-group">
+    <% if params[:category] %><input type="hidden" id="post_category_id" name="post[category_id]" value="<%= params[:category] %>" /><% end %>
+    <%= f.label :title, :class => 'control-label' %>
+    <%= f.text_field :title, :class => 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, :class => 'control-label' %>
+    <%= f.text_area :content, :class => 'form-control' %>
+  </div>
+
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                posts_path, :class => 'btn' %>
+  </div>
+<% end %>

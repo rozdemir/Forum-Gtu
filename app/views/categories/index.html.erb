@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Categories</h1>
+<% if @categories.count>0%>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Post Count</th>
+      <th>Last Post</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td class="text-primary"><%= category.name %></td>
+        <td class="text-success"><%= category.description %></td>
+        <td class="text-info"><%= category.posts.count %></td>
+        <%if category.posts.last%>
+        <td class="text-danger"><%= category.posts.last%></td>
+            <%else%>
+            <td class="text-danger">No post</td>
+            <% end %>
+        <td class="right"></td>
+        <td><%= link_to 'Show Posts', category %></td>
+        <td><% if current_user && current_user.id==1 %><%= link_to 'Edit', edit_category_path(category) %><% end %></td>
+        <td><% if current_user && current_user.id==1 %><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<%else%>
+    <p> No Categories posted  </p>
+<%end%>
+<% if current_user && current_user.id==1 %>
+      <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_category_path,
+            :class => 'btn btn-primary' %>
+<%end%>

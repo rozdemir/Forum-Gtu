@@ -1,0 +1,38 @@
+
+<div class="page-header">
+  <h1><%=@cat %> Posts</h1>
+</div>
+<% if @category.posts.count>0%>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>User</th>
+
+    <th>Title</th>
+    <th>Content</th>
+    <th>Created at</th>
+    <th>Comments count</th>
+    <th>Actions</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <% @category.posts.each do |post| %>
+      <tr>
+
+        <td class="text-primary"><%= post.user %></td>
+        <td class="text-success"><%= post.title %></td>
+        <td class="text-info"><%= post.content %></td>
+        <td class="text-danger"><%=l post.created_at %></td>
+        <td class="text-info"><% post.comments.count %>casc</td>
+        <td><%= link_to 'Show Comments', post %></td>
+        <td><% if current_user && post.user == current_user %><%= link_to 'Edit', edit_post_path(post) %><% end %></td>
+        <td><% if current_user && post.user == current_user %><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<%else%>
+    <p> No Post posted about this category </p>
+<%end%>
+<button class="btn btn-primary"><%= link_to "New Post", "/posts/new?category=#{@category.id}" %></button>
