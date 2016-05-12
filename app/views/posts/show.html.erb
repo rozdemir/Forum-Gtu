@@ -21,8 +21,8 @@
         <td class="text-primary"><%= comment.user %></td>
         <td class="text-success"><%= comment.comment %></td>
 
-        <td><% if current_user && comment.user == current_user %><%= link_to 'Edit', edit_comment_path(comment) %><% end %></td>
-        <td><% if current_user && comment.user == current_user %><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
+        <td><% if current_user && (comment.user == current_user || current_user.id==1 )%><%= link_to 'Edit', edit_comment_path(comment) %><% end %></td>
+        <td><% if current_user && (comment.user == current_user || current_user.id==1) %><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
 
       </tr>
   <% end %>

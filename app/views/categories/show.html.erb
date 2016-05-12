@@ -26,8 +26,8 @@
         <td class="text-danger"><%=l post.created_at %></td>
         <td class="text-info"><% post.comments.count %>casc</td>
         <td><%= link_to 'Show Comments', post %></td>
-        <td><% if current_user && post.user == current_user %><%= link_to 'Edit', edit_post_path(post) %><% end %></td>
-        <td><% if current_user && post.user == current_user %><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
+        <td><% if current_user && (post.user == current_user || current_user.id==1) %><%= link_to 'Edit', edit_post_path(post) %><% end %></td>
+        <td><% if current_user && (post.user == current_user || current_user.id==1 ) %><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
       </tr>
   <% end %>
   </tbody>
